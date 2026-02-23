@@ -31,7 +31,7 @@ Open the URL Wrangler prints (e.g. `http://localhost:8787`). Enter a documentati
 ## Deploy
 
 ```bash
-npm run deploy
+npx wrangler deploy
 ```
 
 Durable Objects use SQLite storage (`new_sqlite_classes` in `wrangler.toml`), which is required on Cloudflare’s free plan. The migration in `wrangler.toml` creates the `DocSession` namespace with SQLite.
