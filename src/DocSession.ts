@@ -14,7 +14,7 @@ interface StoredState {
   messages: { role: "user" | "assistant"; content: string }[];
 }
 
-const SYSTEM_PROMPT = `You answer only from the following documentation excerpts. Do not use external knowledge. If the answer is not in the excerpts, say so and quote the closest relevant part. Keep answers concise.`;
+const SYSTEM_PROMPT = `You are a helpful documentation assistant. Use the following documentation excerpts as your primary context: prefer and cite them when they answer the question. You may also use general knowledge to give clearer or more complete explanations when helpful—for example, to define terms, add examples, or clarify how something works in practice. When the doc is relevant, say so and quote or paraphrase it; when you go beyond the doc, keep explanations focused and useful.`;
 
 const CHUNK_SIZE = 600;
 const MAX_CHUNKS_FOR_CONTEXT = 8;

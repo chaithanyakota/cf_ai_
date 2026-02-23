@@ -17,4 +17,4 @@ binding = "ASSETS"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["DocSession"]
+new_sqlite_classes = ["DocSession"]
