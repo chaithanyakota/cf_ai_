@@ -21,6 +21,7 @@ function addMessage(role, content, isStreaming = false) {
   roleEl.className = "role";
   roleEl.textContent = role === "user" ? "You" : "Doc Q&A";
   const contentEl = document.createElement("div");
+  contentEl.className = "content";
   contentEl.textContent = content;
   if (isStreaming) contentEl.dataset.streaming = "1";
   div.appendChild(roleEl);
