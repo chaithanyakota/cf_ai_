@@ -1,6 +1,6 @@
 # One-URL Doc Q&A
 
-An AI-powered Q&A app that loads **one** documentation URL, chunks it in memory, and answers questions using only that page. Built for Cloudflare (Workers, Durable Objects, Workers AI). No Vectorize—retrieval is keyword-based.
+An AI-powered Q&A app that loads **one** documentation URL, chunks it in memory, and answers questions using only that page. Built using Cloudflare tools - Workers, Durable Objects, and Workers AI
 
 ## Features
 
