@@ -1,6 +1,6 @@
-# API Doc Q&A
+# DocChat (cf_ai_)
 
-An AI-powered Q&A app that loads **one** documentation URL, chunks it in memory, and answers questions using only that page. Built using Cloudflare tools - Workers, Durable Objects, and Workers AI
+An AI-powered doc chat app that loads **one** documentation URL, chunks it in memory, and answers questions using that page as context. Built on Cloudflare Workers, Durable Objects, and Workers AI (Llama 3.3).
 
 ## Demo
 
@@ -12,33 +12,38 @@ An AI-powered Q&A app that loads **one** documentation URL, chunks it in memory,
 - **Ask**: Type a question → keyword retrieval over chunks, then Llama 3.3 (Workers AI) answers with context; response streams to the UI.
 - **State**: One Durable Object per session holds `url`, `chunks`, and `messages` (conversation history).
 
+## Running instructions
+
+**Try locally**
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+3. Open the URL Wrangler prints (e.g. <http://localhost:8787>) in your browser.
+4. In the app: enter a documentation URL (e.g. a Cloudflare or MDN docs page), click **Load doc**, then type questions and click **Ask**.
+
+**Try deployed**
+
+After running `npm run deploy`, use the Workers URL Wrangler outputs (e.g. `https://one-url-doc-qa.<your-subdomain>.workers.dev`) and follow the same steps as above.
+
 ## Requirements
 
 - Node.js 18+
 - [Wrangler](https://developers.cloudflare.com/workers/wrangler/) CLI
 - Cloudflare account with Workers AI and Durable Objects enabled
 
-## Setup
-
-```bash
-npm install
-```
-
-## Develop
-
-```bash
-npm run dev
-```
-
-Open the URL Wrangler prints (e.g. `http://localhost:8787`). Enter a documentation URL, click **Load doc**, then ask questions in the chat.
-
 ## Deploy
 
 ```bash
-npx wrangler deploy
+npm run deploy
 ```
 
-Durable Objects use SQLite storage (`new_sqlite_classes` in `wrangler.toml`), which is required on Cloudflare’s free plan. The migration in `wrangler.toml` creates the `DocSession` namespace with SQLite.
+Durable Objects use SQLite storage (`new_sqlite_classes` in `wrangler.toml`), required on Cloudflare’s free plan.
 
 ## Project layout
 
@@ -51,6 +56,10 @@ Durable Objects use SQLite storage (`new_sqlite_classes` in `wrangler.toml`), wh
 - `POST /api/set-url` – Body: `{ "url": "https://..." }`. Loads and chunks the page for this session.
 - `POST /api/ask` – Body: `{ "message": "..." }`. Returns a streamed SSE response (Workers AI format).
 - `GET /api/status` – Returns `{ url, chunks, messages }` for the current session.
+
+## AI-assisted development
+
+AI prompts used to build this project are documented in [PROMPTS.md](./PROMPTS.md).
 
 ## License
 
